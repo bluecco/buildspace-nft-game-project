@@ -4,21 +4,25 @@ const main = async () => {
     ["Average Stormtrooper", "Holy Murky"],
     ["https://i.imgur.com/0aMcFDX.jpeg", "https://i.imgur.com/YMZG8WM.jpeg"],
     [100, 250], // HP values
-    [10, 75] // Attack damage values
+    [10, 75], // Attack damage values
+    "Evil Kitty", // Boss name
+    "https://i.imgur.com/UlD6pHT.jpeg", // Boss image
+    10000, // Boss hp
+    50 // Boss attack damage
   );
   await gameContract.deployed();
   console.log("Contract deployed to:", gameContract.address);
 
   let txn;
-  txn = await gameContract.mint(0);
-  await txn.wait();
-  console.log("Minted NFT #1");
-
   txn = await gameContract.mint(1);
   await txn.wait();
-  console.log("Minted NFT #2");
 
-  console.log("Done deploying and minting!");
+  txn = await gameContract.attackBoss();
+  await txn.wait();
+
+  txn = await gameContract.attackBoss();
+  await txn.wait();
+  console.log("Done!");
 };
 
 const runMain = async () => {
